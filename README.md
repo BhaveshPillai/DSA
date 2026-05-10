@@ -1,2 +1,2 @@
 # DSA
-This repository comprises of the DSA questions that I solved and practiced with all the code and idea applied to it.
+A collection of Data Structures and Algorithms problems I solved during practice, including optimized code and problem-solving approaches.
