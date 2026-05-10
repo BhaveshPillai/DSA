@@ -1,0 +1,43 @@
+#CODE
+class Solution {
+public:
+    int romanToInt(string s) {
+        int n = s.length();
+        unordered_map<char,int>mp = {
+            {'I',1},
+            {'V',5},
+            {'X',10},
+            {'L',50},
+            {'C',100},
+            {'D', 500},
+            {'M', 1000}
+        };
+        int decimalNo = 0;
+        int i = n-1;
+        while(i>=0){
+            auto it = mp.find(s[i]);
+            if(i==n-1){
+                decimalNo+=it->second;
+            }
+            else if(it->second<mp.find(s[i+1])->second){
+                decimalNo-=it->second; 
+            }
+            else decimalNo+=it->second;
+            i--;
+        }
+        return decimalNo;
+    }
+};
+
+
+"Idea:- 
+
+1) creating an unordered map.. Reason?
+  as for accessing it uses time complexity of O(1) as it uses hashing 
+2) iterate from left to right through input string 
+  as when you get a value that is smaller than the next one i.e. for example IV then we can first Add V=5 in variable sum and then subtract I=1 from that to get the result as 4
+3) here iterator is used so to get the first and second elemnet of map we need to write in form of iterator->second or iterator->first and not iterator.second"
+
+
+#TIME complexity = O(n) 
+#SPACE complexity = O(1) 
