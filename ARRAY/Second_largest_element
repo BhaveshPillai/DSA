@@ -1,0 +1,33 @@
+#C++ Code
+class Solution {
+  public:
+    int getSecondLargest(vector<int> &arr) {
+        // code here
+        int n = arr.size();
+        int largest = INT_MIN;
+        int sec_largest = -1;
+        for(int i = 0;i<n;i++){
+            if(arr[i]>largest){
+                largest = arr[i];
+            }
+        }
+        for(int i = 0;i<n;i++){
+            if(arr[i]<largest && arr[i]>sec_largest){
+                sec_largest = arr[i];
+            }
+        }
+        return sec_largest;
+    }
+};
+
+"Idea: 
+  ### Idea Behind the Question
+
+The goal is to find the **second largest distinct element** in the array.
+First, we need to know the largest element because the second largest must always be smaller than it.
+After finding the largest value, we again traverse the array to search for the greatest element that is not equal to the largest.
+If no such element exists (all elements are same), we return `-1`.
+This approach is simple and easy to understand using two passes through the array.
+
+Time Complexity:- O(2n)                                                                     Space Complexity:- O(1) 
+"
