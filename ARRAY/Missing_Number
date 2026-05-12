@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n = nums.size();
+        int add = (n*(n+1))/2;
+        int sum = 0;
+        int missing_no = 0;
+        for(int i = 0;i<n;i++){
+            sum+=nums[i];
+        }
+        missing_no = add-sum;
+        return missing_no;
+    }
+};
+
+"idea:
+This approach finds the missing number using the sum formula of first n natural numbers.
+Since the array contains numbers from 0 to n with one number missing, the expected total sum is calculated using:
+n(n+1)/2
+The variable add stores this expected sum, while sum stores the actual sum of elements present in the array.
+A loop traverses the array and adds every element to sum.
+The missing number is obtained by subtracting the actual sum from the expected sum (add - sum).
+Finally, the result is returned as the missing element in the range.
+"
+
+#Time Complexity: O(n)                                                                    Space Complexity: O(1)
