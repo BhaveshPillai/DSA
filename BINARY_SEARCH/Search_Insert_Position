@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        int n = nums.size();
+        int mid = 0;
+        int s = 0,e = n-1;
+        while(s<=e){
+            mid = s+(e-s)/2;
+            if(nums[mid]==target){
+                return mid;
+            }
+            else if(nums[mid]<target){
+                s = mid+1;
+            }
+            else{
+                e = mid-1;
+            }
+        }
+        if(nums[mid]<target) return mid+1;
+        else return mid;
+    }
+};
+
+"idea:
+This solution uses the Binary Search algorithm to efficiently find the target or its correct insertion position in a sorted array.
+We initialize two pointers, s (start) and e (end), to search within the array range.
+In every iteration, the middle index mid is calculated using s + (e - s) / 2 to avoid integer overflow.
+If nums[mid] equals the target, the index is returned immediately.
+If the target is greater than nums[mid], the search moves to the right half by updating s = mid + 1; otherwise, it searches the left half using e = mid - 1.
+The loop continues until the search space becomes invalid (s > e).
+After the loop, mid helps determine the correct insertion index: if nums[mid] < target, insert at mid + 1; otherwise, insert at mid.
+"
+
+#Time Complexity : O(log n)                    Space Complexity: O(1)
