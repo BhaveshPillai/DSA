@@ -1,0 +1,48 @@
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode*head = NULL;
+        ListNode*temp = NULL;
+        if(!list1) return list2;
+        if(!list2) return list1;
+        if(list1->val <= list2->val){
+            head = list1;
+            list1 = list1->next;
+        }
+        else{
+            head = list2;
+            list2 = list2->next;
+        }
+        temp = head;
+        while(list1!=NULL && list2!=NULL){
+            if(list1->val <= list2->val){
+                temp->next = list1;
+                list1 = list1->next;
+            }
+            else{
+                temp->next = list2;
+                list2 = list2->next;
+            }
+            temp = temp->next;
+        }
+        if(list1!=NULL) temp->next = list1;
+        else temp->next = list2;
+        return head;
+    }
+};
+
+
+"Idea:
+We are given two sorted linked lists, and the goal is to merge them into a single sorted linked list.
+The main idea is similar to the merge step of Merge Sort.
+
+First, compare the first nodes of both lists and choose the smaller one as the head of the merged list.
+Use a pointer temp to keep track of the last node in the merged list.
+Traverse both lists simultaneously while both are non-empty.
+At each step, compare list1->val and list2->val, then attach the smaller node to temp->next.
+Move the corresponding list pointer forward and also move temp forward.
+Once one list becomes empty, attach the remaining part of the other list directly since it is already sorted.
+Finally, return head, which points to the merged sorted linked list.
+"
+
+#Time Complexity: O(n+m)                                                                      Space Complexity: O(1)
