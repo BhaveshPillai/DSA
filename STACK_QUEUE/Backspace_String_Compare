@@ -1,0 +1,52 @@
+class Solution {
+public:
+    bool backspaceCompare(string s, string t) {
+        string s1 = "";
+        string s2 = "";
+        int n1 = s.length();
+        int n2 = t.length();
+        stack<char>st1;
+        stack<char>st2;
+        for(int i = 0;i<n1;i++){
+            if(s[i] == '#') {
+                if(!st1.empty()) {
+                    st1.pop();
+                }
+            }
+            else st1.push(s[i]);
+        }
+        for(int i = 0;i<n2;i++){
+            if(t[i] == '#') {
+                if(!st2.empty()) {
+                    st2.pop();
+                }
+            }
+            else{
+                st2.push(t[i]);
+            }
+        }
+        while(!st1.empty()){
+            char ans = st1.top();
+            s1.push_back(ans);
+            st1.pop();
+        }
+        while(!st2.empty()){
+            char ans = st2.top();
+            s2.push_back(ans);
+            st2.pop();
+        }
+        return s1==s2;
+    }
+};
+
+"Idea:
+1. The idea is to simulate the typing process of both strings using stacks.
+2. Each character is processed one by one from left to right.
+3. If the character is a normal letter, it is pushed into the stack.
+4. If the character is `'#'`, it represents a backspace, so the top element is removed from the stack if it is not empty.
+5. After processing both strings, the stacks contain the final valid characters after all backspaces are applied.
+6. The characters are then popped from the stacks and stored into new strings for comparison.
+7. If both final strings are equal, it means both typed texts are the same, so return `true`; otherwise return `false`.
+"
+
+#Time Complexity:- O(n1+n2)                                       Space Complexity:- O(n1+n2)
