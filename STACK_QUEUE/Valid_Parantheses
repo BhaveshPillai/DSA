@@ -22,6 +22,12 @@ public:
 };
 
 "Idea:
-
-
+The idea is to use a stack to keep track of opening brackets while traversing the string.
+Whenever an opening bracket (, {, or [ appears, push it into the stack.
+When a closing bracket is encountered, check if the stack is empty; if yes, the string is invalid.
+Otherwise, compare the current closing bracket with the top element of the stack.
+If both brackets form a valid pair, remove the opening bracket from the stack using pop().
+If the brackets do not match, immediately return false because the order is incorrect.
+After processing the entire string, the stack should be empty for the string to be valid
 "
+#Time Complexity:- O(n)             Space Complexity:- O(n)
