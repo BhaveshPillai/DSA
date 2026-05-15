@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool isSymmetric(TreeNode* root) {
+        return root==NULL || isMirror(root->left, root->right);
+    }
+    bool isMirror(TreeNode* lefty, TreeNode* righty){
+        if(lefty==NULL || righty==NULL) return lefty==righty;
+        if(lefty->val!=righty->val) return false;
+        return isMirror(lefty->left, righty->right) && isMirror(lefty->right, righty->left);
+    }
+};
+
+"Idea:
+This solution checks whether a binary tree is symmetric by comparing the left and right subtrees as mirror images.
+The main function calls isMirror() for the left and right child of the root.
+
+In isMirror(), if either node becomes NULL, it returns whether both are equal (NULL).
+Then it checks if the values of both nodes are the same. If not, the tree is not symmetric.
+After that, recursion is used to compare:
+
+left child of the left subtree with right child of the right subtree
+right child of the left subtree with left child of the right subtree
+
+If both recursive checks return true, the tree is symmetric.
+"
+
