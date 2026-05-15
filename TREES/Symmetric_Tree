@@ -24,3 +24,4 @@ right child of the left subtree with left child of the right subtree
 If both recursive checks return true, the tree is symmetric.
 "
 
+#Time complexity:- O(n)                Space Complexity:- O(h) where h = height of the tree
