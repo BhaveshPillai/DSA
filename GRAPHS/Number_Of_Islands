@@ -1,0 +1,81 @@
+class Solution {
+public:
+
+    void bfs(int row, int col,
+             vector<vector<int>>& vis,
+             vector<vector<char>>& grid) {
+
+        vis[row][col] = 1;
+
+        queue<pair<int, int>> q;
+        q.push({row, col});
+
+        int n = grid.size();
+        int m = grid[0].size();
+
+        int delrow[] = {-1, 0, 1, 0};
+        int delcol[] = {0, 1, 0, -1};
+
+        while (!q.empty()) {
+
+            int r = q.front().first;
+            int c = q.front().second;
+            q.pop();
+
+            for (int i = 0; i < 4; i++) {
+
+                int nrow = r + delrow[i];
+                int ncol = c + delcol[i];
+
+                if (nrow >= 0 && nrow < n &&
+                    ncol >= 0 && ncol < m &&
+                    grid[nrow][ncol] == '1' &&
+                    !vis[nrow][ncol]) {
+
+                    vis[nrow][ncol] = 1;
+                    q.push({nrow, ncol});
+                }
+            }
+        }
+    }
+
+    int numIslands(vector<vector<char>>& grid) {
+
+        int n = grid.size();
+        int m = grid[0].size();
+
+        vector<vector<int>> vis(n, vector<int>(m, 0));
+
+        int cnt = 0;
+
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < m; col++) {
+
+                if (!vis[row][col] && grid[row][col] == '1') {
+                    cnt++;
+                    bfs(row, col, vis, grid);
+                }
+            }
+        }
+
+        return cnt;
+    }
+};
+
+
+
+"Idea:
+1. The idea is to treat every group of connected `'1'` cells as one island.
+2. We traverse the entire grid using nested loops row by row and column by column.
+3. Whenever we find an unvisited cell containing `'1'`, it means a new island is discovered.
+4. We increase the island count and start a BFS traversal from that cell.
+5. BFS helps us visit all connected land cells belonging to the same island.
+6. A queue is used in BFS to process neighboring cells level by level.
+7. We move in 4 directions (up, right, down, left) using `delrow` and `delcol` arrays.
+8. Every valid neighboring land cell is marked visited and pushed into the queue.
+9. This ensures each cell is visited only once, avoiding repeated processing.
+10. Finally, the total number of BFS calls gives the total number of islands in the grid.
+
+"
+
+
