@@ -11,3 +11,16 @@ public:
         return false;
     }
 };
+
+
+"Idea:
+Use two pointers: slow and fast, both starting from the head of the linked list.
+The slow pointer moves one step at a time, while the fast pointer moves two steps at a time.
+If the linked list contains a cycle, the fast pointer will eventually catch up to the slow pointer.
+Traverse the list while fast and fast->next are not NULL to avoid invalid access.
+Inside the loop, move slow by one node and fast by two nodes.
+If at any point slow == fast, it means a cycle exists, so return true.
+If the loop ends because fast reaches NULL, the list has no cycle, so return false.
+Time Complexity: O(n)
+Space Complexity: O(1)
+"
