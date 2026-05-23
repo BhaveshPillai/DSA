@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int n = nums.size();
+        map<int,int>mp;
+        for(int i = 0;i<n;i++){
+            mp[nums[i]]++;
+        }
+        int ans = -1;
+        for(auto&i:mp){
+            if(i.second>(n/2)){
+                ans = i.first;
+            }
+        }
+        return ans;
+    }
+};
+
+
+"Idea:
+Create a map mp to store the frequency of each element in the array.
+Traverse the array and increment the count of every number using mp[nums[i]]++.
+After counting frequencies, iterate through the map.
+Check if any element appears more than n/2 times, where n is the size of the array.
+The element satisfying this condition is the majority element.
+Store that element in ans and return it at the end.
+Time Complexity: O(n log n) because map operations take O(log n) time, and Space Complexity: O(n) for storing frequencies.
+"
