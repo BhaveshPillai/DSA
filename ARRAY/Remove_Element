@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        int n = nums.size();
+        int s = 0, e = n-1;
+        int cnt = 0;
+        while(s<=e){
+            if(nums[s]!=val){
+                s++;
+                cnt++;
+            }
+            else{
+                swap(nums[s],nums[e]);
+                e--;
+            }
+        }
+        return cnt;
+    }
+};
+
+"Idea:
+Use two pointers: s starting from the beginning and e from the end of the array.
+The goal is to move all occurrences of val towards the end of the array.
+Traverse the array while s <= e.
+If nums[s] is not equal to val, it is a valid element, so increment cnt and move s forward.
+If nums[s] == val, swap it with nums[e] so the unwanted element goes to the back.
+Decrease e after swapping because the last position is now processed.
+Finally, cnt represents the number of elements remaining after removing val.
+Time Complexity: O(n)
+Space Complexity: O(1)
+"
