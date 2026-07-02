@@ -1,0 +1,62 @@
+class Solution {
+  public:
+    int precedence(char op)
+    {
+        if(op == '+' || op == '-') return 1;
+        if(op == '*' || op == '/') return 2;
+        if(op == '^') return 3;
+
+        return 0;
+    }
+    string infixToPostfix(string& s) {
+        // code here
+        int n = s.length();
+        string ans = "";
+        stack<char>st;
+        for(int i = 0;i<n;i++){
+            if(s[i]>='a' && s[i]<='z' || s[i]>='A' && s[i]<='Z' || s[i]>='0' && s[i]<='9'){
+                ans.push_back(s[i]);
+            }
+            else{
+                if(s[i]=='(') st.push(s[i]);
+                else if(s[i]==')'){
+                    while(st.top()!='('){
+                        ans.push_back(st.top());
+                        st.pop();
+                    }
+                    st.pop();
+                }
+                else{
+                    while(!st.empty() && st.top() != '(' && precedence(st.top())>=precedence(s[i]) && s[i] != '^'){
+                        ans.push_back(st.top());
+                        st.pop();
+                    }
+                    st.push(s[i]);
+                    
+                }
+            }
+        }
+        while(!st.empty()){
+            ans.push_back(st.top());
+            st.pop();
+        }
+        return ans;
+        
+    }
+};
+"IDEA:
+The idea is simple:- 
+we create a string ans and stack to store operators. When traversing the string, when we come across an expression we simply push it in string ans and 
+if the character is an operator we push it in stack.
+For parentheses we push '(' in stack and while we dont get ')' we push operators in stack and expression in string. When we get ')', we simply push the elments of 
+stack in string ans till we get st.top() == '('.
+For an operator, pop and append all operators from the stack having higher or equal precedence (except for ^, which is right-associative), then push the current operator.
+After processing the entire expression, pop all remaining operators from the stack and append them to the postfix expression.
+The resulting string is the ans.
+"
+
+Time complexity :- O(N)                                                       Space Complexity :- O(N)
+
+
+
+
